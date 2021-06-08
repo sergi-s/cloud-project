@@ -3,7 +3,7 @@ language: generic
 services:
   - docker
 
-after_succes:
+after_success:
   - docker build -t sergi-s/cloud-project .
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
