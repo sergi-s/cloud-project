@@ -3,12 +3,12 @@ language: generic
 services:
   - docker
 
-after_success:
-  - docker build -t sergi-s/cloud-project .
+# after_success:
+#   - docker build -t sergi-s/cloud-project .
 
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+#   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker push sergi2000/cloud-project
+#   - docker push sergi-s/cloud-project
 
 deploy:
   provider: elasticbeanstalk
