@@ -1,25 +1,24 @@
 language: generic
-
 services:
-  - docker
-
+    - docker
+    
 after_success:
-  - docker build -t sergi2000/cloud-project .
+    - docker build -t sergi2000/cloud-project .
 
-  - echo "$DOCKER_PASSWORD"| docker login -u ="$DOCKER_ID" --password-stdin
-  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD" docker.io
-  - docker tag firstimage sergi2000/cloud-project
-  - docker push sergi2000/cloud-project
+    - echo "$DOCKER_PASSWORD"| docker login -u ="$DOCKER_ID" --password-stdin
+    - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD" docker.io
+    - docker tag firstimage sergi2000/cloud-project
+    - docker push sergi2000/cloud-project 
 
 deploy:
-  provider: elasticbeanstalk
-  region: ap-south-1
-  app: serg-cloud-app-2v3
-  env: Sergcloudapp2v3-env
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  edge: true
-  bucket_name: "sergibucketname"
-  bucket_path: "docker"
-  on:
-    branch: main
+   provider: elasticbeanstalk
+   region: ap-south-1
+   app: serg-cloud-app-2v3
+   env: Sergcloudapp2v3-env
+   access_key_id: $AWS_ACCESS_KEY
+   secret_access_key: $AWS_SECRET_KEY
+   edge: true
+   bucket_name: "sergibucketname"
+   bucket_path: "docker"
+   on:
+     branch: main
