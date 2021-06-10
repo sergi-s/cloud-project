@@ -3,8 +3,9 @@ language: generic
 services:
   - docker
 
-after_success:
+after_succes:
   - docker build -t sergi2000/cloud-project .
+
   - echo "$DOCKER_PASSWORD"| docker login -u ="$DOCKER_ID" --password-stdin
   - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD" docker.io
   - docker tag firstimage sergi2000/cloud-project
