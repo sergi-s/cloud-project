@@ -4,11 +4,11 @@ services:
   - docker
 
 after_success:
-  - docker build -t sergi-s/cloud-project .
-
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
-  # - docker push sergi-s/cloud-project
+  - docker build -t sergi2000/cloud-project .
+  - echo "$DOCKER_PASSWORD"| docker login -u ="$DOCKER_ID" --password-stdin
+  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD" docker.io
+  - docker tag firstimage sergi2000/cloud-project
+  - docker push sergi2000/cloud-project
 
 deploy:
   provider: elasticbeanstalk
@@ -18,7 +18,7 @@ deploy:
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
   edge: true
-  bucket_name: multi-container-cloud-project
+  bucket_name: "multi-container-cloud-project"
   bucket_path: "docker"
   on:
     branch: main
